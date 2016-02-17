@@ -26,7 +26,6 @@ void SensingBrain::initialize()
 
 void SensingBrain::tick()
 {
-	digitalWrite(13, HIGH);
 	if (sensorCount == 0) {
 		return;
 	}
@@ -52,9 +51,8 @@ void SensingBrain::tick()
 		sensors[previousSensor].values[sensors[previousSensor].nextValue] = newValue;
 
 		//Populate with values
-		Origo::instance().forward = getSensorValue(sensors[previousSensor].name);
+		*(sensors[previousSensor].value) = getSensorValue(sensors[previousSensor].name);
 	}
-	digitalWrite(13, LOW);
 }
 
 int SensingBrain::addSensor(const char * name, int trigPin, int echoPin, int* value)

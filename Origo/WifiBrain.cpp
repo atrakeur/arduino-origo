@@ -2,6 +2,7 @@
 // 
 // 
 
+#include "Config.h"
 #include "Origo.h"
 #include "WifiBrain.h"
 
