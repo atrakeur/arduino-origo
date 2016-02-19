@@ -24,10 +24,10 @@ void SensingBrain::initialize()
 	this->addSensor("forward", 9, 8, &(Origo::instance().forward));
 }
 
-void SensingBrain::tick()
+int SensingBrain::tick()
 {
 	if (sensorCount == 0) {
-		return;
+		return 1000;
 	}
 
 	//Select the next sensor
@@ -53,6 +53,8 @@ void SensingBrain::tick()
 		//Populate with values
 		*(sensors[previousSensor].value) = getSensorValue(sensors[previousSensor].name);
 	}
+
+	return 100;
 }
 
 int SensingBrain::addSensor(const char * name, int trigPin, int echoPin, int* value)

@@ -39,7 +39,7 @@ public:
 
 	char* getName();
 	void initialize();
-	void tick();
+	int tick();
 protected:
 	void setupHandlers();
 	void onWifiEvent(void* response);

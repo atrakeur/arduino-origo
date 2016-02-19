@@ -60,7 +60,7 @@ void Brain::tick()
 	//Jump to the next module available
 	for (int i = 1; i < BRAIN_MAX_MODULES; i++) {
 		int index = (nextModule + i) % BRAIN_MAX_MODULES;
-		if (configs[index].enabled) {
+		if (configs[index].enabled && configs[index].isDue()) {
 			nextModule = index;
 			break;
 		}
@@ -128,7 +128,8 @@ void Brain::executeModule(BrainConfig * config)
 {
 	actualModule = config;
 
-	config->module->tick();
+	int retVal = config->module->tick();
+	config->nextRunTime = millis() + retVal;
 
 	actualModule = nullptr;
 }

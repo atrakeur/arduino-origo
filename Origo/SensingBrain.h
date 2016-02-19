@@ -41,7 +41,7 @@ public:
 	SensingBrain();
 	char* getName();
 	void initialize();
-	void tick();
+	int tick();
 
 	int addSensor(const char* name, int trigPin, int echoPin, int* value);
 	int removeSensor(const char* name);

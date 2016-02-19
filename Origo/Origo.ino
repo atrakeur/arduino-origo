@@ -1,3 +1,4 @@
+#include <NewPing.h>
 #include <ringbuf.h>
 #include <rest.h>
 #include <mqtt.h>

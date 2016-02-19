@@ -24,7 +24,7 @@ public:
 	/* Initialize the module */
 	virtual void initialize() = 0;
 	/* Run the module code */
-	virtual void tick() = 0;
+	virtual int tick() = 0;
 };
 
 typedef struct BrainConfig {
@@ -32,6 +32,10 @@ typedef struct BrainConfig {
 	AbstractBrain* module;
 
 	unsigned long nextRunTime;
+
+	inline bool isDue() {
+		return millis() - nextRunTime > 0;
+	}
 };
 
 class Brain {

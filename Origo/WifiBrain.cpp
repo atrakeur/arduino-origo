@@ -38,9 +38,10 @@ void WifiBrain::initialize()
 	setupHandlers();
 }
 
-void WifiBrain::tick()
+int WifiBrain::tick()
 {
 	esp.process();
+	return 0;
 }
 
 void WifiBrain::setupHandlers()
