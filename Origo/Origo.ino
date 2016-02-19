@@ -1,3 +1,4 @@
+#include "StatusLed.h"
 #include <NewPing.h>
 #include <ringbuf.h>
 #include <rest.h>
@@ -14,6 +15,7 @@
 #include "SensingBrain.h"
 
 Brain brain;
+StatusLed status;
 SensingBrain sensors;
 WifiBrain wifi(&Serial1);
 
@@ -22,6 +24,7 @@ void setup() {
 	while (!Serial);
 
 	Serial.println("Setup: Configuring brain modules");
+	brain.addModule(&status);
 	brain.addModule(&wifi);
 	brain.addModule(&sensors);
 

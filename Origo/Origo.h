@@ -1,3 +1,6 @@
+#ifndef _ORIGO_h
+#define _ORIGO_h
+
 #define DEBUG
 
 #ifdef DEBUG
@@ -27,3 +30,5 @@ private:
 	Origo(Origo const&);
 	void operator=(Origo const&) {};
 };
+
+#endif

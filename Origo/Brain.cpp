@@ -53,7 +53,7 @@ void Brain::initialize()
 void Brain::tick()
 {
 	//Run module code
-	if (configs[nextModule].enabled) {
+	if (configs[nextModule].enabled && configs[nextModule].isDue()) {
 		executeModule(&configs[nextModule]);
 	}
 
@@ -129,7 +129,8 @@ void Brain::executeModule(BrainConfig * config)
 	actualModule = config;
 
 	int retVal = config->module->tick();
-	config->nextRunTime = millis() + retVal;
+	config->lastRunTime = millis();
+	config->timeInterval = retVal;
 
 	actualModule = nullptr;
 }

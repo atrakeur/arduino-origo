@@ -31,10 +31,11 @@ typedef struct BrainConfig {
 	boolean enabled;
 	AbstractBrain* module;
 
-	unsigned long nextRunTime;
+	unsigned long lastRunTime;
+	int timeInterval;
 
 	inline bool isDue() {
-		return millis() - nextRunTime > 0;
+		return (unsigned long)(millis() - lastRunTime) >= timeInterval;
 	}
 };
 

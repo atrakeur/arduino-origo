@@ -1,6 +1,7 @@
 // SensingBrain.h
 
 #include "Brain.h"
+#include <NewPing.h>
 
 #ifndef _SENSINGBRAIN_h
 #define _SENSINGBRAIN_h
@@ -13,29 +14,26 @@
 
 #define SENSING_MAX_SENSORS 4
 #define SENSING_SAMPLE_COUNTS 4
+#define SENSING_SAMPLE_INTERVAL 50
 
 #define SENSING_OK 0
 #define SENSING_ERROR_NOSLOT -1
-#define SENSING_ERROR_NOTFOUND -2
 
 typedef struct Sensor {
-	boolean enabled;
-	const char* name;
-	int trigPin;
-	int echoPin;
+	bool enabled;
+	
+	int pinTrig;
+	int pinEcho;
 
-	/* Rolling average of samples */
-	int nextValue;						//The next value to write
-	int values[SENSING_SAMPLE_COUNTS];	//All the sample values
-
-	/* Pointer to where to store the actual value */
-	int* value;
+	long* result;
+	long results[SENSING_SAMPLE_COUNTS];
+	int nextSampleAt;
 } Sensor;
 
 class SensingBrain : public AbstractBrain {
 private:
-	int sensorCount = 0;
-	int previousSensor = 0;
+	int sensorCount;
+	int nextSensor;
 	Sensor sensors[SENSING_MAX_SENSORS];
 public:
 	SensingBrain();
@@ -43,13 +41,13 @@ public:
 	void initialize();
 	int tick();
 
-	int addSensor(const char* name, int trigPin, int echoPin, int* value);
-	int removeSensor(const char* name);
-	int getSensorValue(const char* name);
-
+	int addSensor(int pinTrig, int pinEcho, long* result);
+	int removeSensor(int pinTrig, int pinEcho);
 protected:
-	Sensor* getSensorConfig(const char* name);
-	Sensor* getFreeSensorSlot();
+	Sensor* getFreeSensor();
+	int getSensorResult(Sensor* sensor);
+	void setSensorResult(Sensor* sensor, long result);
+	void measure(Sensor* sensor);
 };
 
 #endif
