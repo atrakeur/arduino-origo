@@ -55,7 +55,9 @@ void WifiBrain::setupHandlers()
 		DEBUG_PRINT("\tWifi Brain: Setup mqtt FAILED\n");
 	}
 
-	DEBUG_PRINT("\tWifi Brain: Setup Wifi\n");
+	DEBUG_PRINT("\tWifi Brain: Setup Wifi to ");
+	DEBUG_PRINT(WIFI_SSID);
+	DEBUG_PRINT("\n");
 	esp.wifiCb.attach(this, &WifiBrain::onWifiEvent);
 	esp.wifiConnect(WIFI_SSID, WIFI_PASS);
 }
@@ -87,9 +89,11 @@ void WifiBrain::onMqttConnect(void * response)
 	Origo::instance().isOnline = true;
 
 	//Setup subscribes
-	mqtt.subscribe("/topic/0");
-	mqtt.publish("/esp", "online");
+	mqtt.subscribe("/speed/0");
+	mqtt.subscribe("/steer/0");
 	//Publish online status
+	mqtt.publish("/speed/0", "auto");
+	mqtt.publish("/steer/0", "auto");
 	DEBUG_PRINT("\tWifi Brain: MQTT Connected to ");
 	DEBUG_PRINT(MQTT_BROKER_ADDR);
 	DEBUG_PRINT("\n");
@@ -102,8 +106,15 @@ void WifiBrain::onMqttData(void * response)
 	String data = res.popString();
 
 	//TODO do something with received data
+	if (topic.compareTo("/steer/0") == 0) {
+		Origo::instance().steer = (int)data.toInt();
+	}
+	if (topic.compareTo("/speed/0") == 0) {
+		Origo::instance().speed = (int)data.toInt();
+	}
 
-	DEBUG_PRINT("\tWifi Brain: Received: ");
+	//TODO remove that
+	DEBUG_PRINT("\t");
 	DEBUG_PRINT(topic);
 	DEBUG_PRINT(" = ");
 	DEBUG_PRINT(data);

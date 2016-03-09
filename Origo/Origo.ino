@@ -16,7 +16,7 @@
 
 Brain brain;
 StatusLed status;
-SensingBrain sensors;
+//SensingBrain sensors;
 WifiBrain wifi(&Serial1);
 
 void setup() {
@@ -26,7 +26,7 @@ void setup() {
 	Serial.println("Setup: Configuring brain modules");
 	brain.addModule(&status);
 	brain.addModule(&wifi);
-	brain.addModule(&sensors);
+	//brain.addModule(&sensors);
 
 	Serial.println("Setup: Initializing brain modules");
 	brain.initialize();

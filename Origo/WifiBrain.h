@@ -18,8 +18,8 @@
 
 #include "Brain.h"
 
-#define ESP_RST_PIN  6
-#define ESP_CHPD_PIN 7
+#define ESP_RST_PIN  3
+#define ESP_CHPD_PIN 4
 
 /*
  * Brain module for wifi communication

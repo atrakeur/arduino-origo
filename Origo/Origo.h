@@ -22,9 +22,9 @@ public:
 	bool hasWifi;
 	bool isOnline;
 
-	/* Sensor status */
-	int forward;
-	int backward;
+	/* Command status */
+	int speed;
+	int steer;
 private:
 	Origo() {};
 	Origo(Origo const&);
