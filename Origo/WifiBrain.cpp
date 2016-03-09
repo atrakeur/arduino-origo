@@ -92,8 +92,8 @@ void WifiBrain::onMqttConnect(void * response)
 	mqtt.subscribe("/speed/0");
 	mqtt.subscribe("/steer/0");
 	//Publish online status
-	mqtt.publish("/speed/0", "auto");
-	mqtt.publish("/steer/0", "auto");
+	mqtt.publish("/speed/0", "0");
+	mqtt.publish("/steer/0", "0");
 	DEBUG_PRINT("\tWifi Brain: MQTT Connected to ");
 	DEBUG_PRINT(MQTT_BROKER_ADDR);
 	DEBUG_PRINT("\n");

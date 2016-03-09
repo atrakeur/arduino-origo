@@ -81,6 +81,8 @@ extern "C" void __cxa_pure_virtual() {;}
 #include <..\Origo\Brain.cpp>
 #include <..\Origo\Brain.h>
 #include <..\Origo\Config.h>
+#include <..\Origo\MovingBrain.cpp>
+#include <..\Origo\MovingBrain.h>
 #include <..\Origo\Origo.h>
 #include <..\Origo\SensingBrain.cpp>
 #include <..\Origo\SensingBrain.h>
